@@ -1,8 +1,13 @@
+import { Box } from '@mui/material';
 import React from 'react';
 
-function AppIcon({ size = '2rem', onMouseEnter = () => {}, onMouseLeave = () => {} }) {
+function AppIcon({ size = '2rem', onMouseEnter = () => { }, onMouseLeave = () => { }, onClick = () => { } }) {
     return (
-        <React.Fragment>
+        <Box
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+        >
             <img
                 src="/icon.png"
                 alt="pokemax"
@@ -11,10 +16,11 @@ function AppIcon({ size = '2rem', onMouseEnter = () => {}, onMouseLeave = () => 
                     transition: 'transform 0.1s ease-in-out',
                     cursor: 'pointer',
                 }}
+                onClick={onClick}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             />
-        </React.Fragment>
+        </Box>
     );
 }
 

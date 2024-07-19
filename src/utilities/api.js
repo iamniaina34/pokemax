@@ -4,7 +4,7 @@ import axios from 'axios';
  * Class representing an API for fetching Pokémon data.
  * Visit https://pokeapi.co/ for more informations.
  */
-class PokeApi {
+export class PokeApi {
     /**
      * Static cache to store responses from previous requests.
      * @type {Object.<string, any>}
@@ -33,5 +33,3 @@ class PokeApi {
         }
     }
 }
-
-export default PokeApi;

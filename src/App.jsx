@@ -40,9 +40,11 @@ export default function App() {
             }}
           >
             <Box
-              height={'32px'}
+              height={'48px'}
               display={'flex'}
               flexDirection={'row'}
+              justifyContent={'start'}
+              alignItems={'center'}
               gap={1}
             >
               <Link href='/' underline='none'>
@@ -57,10 +59,11 @@ export default function App() {
               </Typography>
             </Box>
             <Box
-              height={'32px'}
+              height={'48px'}
               display={'flex'}
-              flexDirection={'row'}
+              flexDirection={'row-reverse'}
               justifyContent={'end'}
+              alignItems={'center'}
               gap='4px'
             >
               <CustomSwitch
