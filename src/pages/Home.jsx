@@ -12,9 +12,14 @@ function Home() {
       gap={4}
       m={'auto'}
     >
-      <AppIcon size='16rem'/>
+      <AppIcon
+        size='16rem'
+        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+      />
       <Typography
         variant='h4'
+        fontWeight={500}
         letterSpacing={16}
         textAlign={'center'}
       >

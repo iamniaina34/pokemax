@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function AppIcon({ size = '2rem'}) {
+function AppIcon({ size = '2rem', onMouseEnter = () => {}, onMouseLeave = () => {} }) {
     return (
         <React.Fragment>
             <img
@@ -8,10 +8,14 @@ function AppIcon({ size = '2rem'}) {
                 alt="pokemax"
                 style={{
                     width: size,
+                    transition: 'transform 0.1s ease-in-out',
+                    cursor: 'pointer',
                 }}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
             />
         </React.Fragment>
-    )
+    );
 }
 
-export default AppIcon
+export default AppIcon;
