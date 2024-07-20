@@ -11,7 +11,7 @@ export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const savedTheme = localStorage.getItem('isDarkTheme');
     return savedTheme ? JSON.parse(savedTheme) : false;
-  });
+  })
 
   const toggleTheme = (e) => {
     setIsDarkTheme(old => !old)
@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem('isDarkTheme', JSON.stringify(isDarkTheme));
-  }, [isDarkTheme]);
+  }, [isDarkTheme])
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>

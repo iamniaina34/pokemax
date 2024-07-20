@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { PokeApi } from '../../utilities/api'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import PokemonGridComponent from './PokemonGridComponent'
 
 function Pokemon() {
   const [pokemonList, setPokemonList] = useState([])
@@ -9,10 +10,24 @@ function Pokemon() {
   const [hadError, setHadError] = useState(false)
 
   useEffect(() => {
-    PokeApi.fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
-      .then(r => setPokemonList(r.results))
-      .then(r => setIsLoading(false))
+    PokeApi.fetch("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
+      .then(async r => {
+        const detailedPokemonList = await Promise.all(
+          r.results.map(async (pokemon) => {
+            try {
+              const detailedPokemon = await PokeApi.fetch(pokemon.url)
+              return detailedPokemon
+            } catch (error) {
+              console.error(error)
+              return null
+            }
+          })
+        )
+        setPokemonList(detailedPokemonList.filter(pokemon => pokemon !== null))
+        setIsLoading(false)
+      })
       .catch(e => {
+        console.error(e)
         setIsLoading(false)
         setHadError(true)
       })
@@ -37,28 +52,14 @@ function Pokemon() {
     >
       <Grid2
         container
-        spacing={2}
+        spacing={1}
         disableEqualOverflow
       >
-        {pokemonList?.map((pokemon) => (
-          <Grid2 key={pokemon.url} xs={4} sm={3} md={3} xl={2}>
-            <Box
-              minHeight={128}
-              minWidth={128}
-              display={'flex'}
-              flexDirection={'column'}
-              justifyContent={'start'}
-              alignItems={'center'}
-              sx={{
-                border: '1px solid',
-                borderColor: 'InactiveBorder',
-                borderRadius: 2
-              }}
-            >
-              {pokemon.name}
-            </Box>
-          </Grid2>
-        ))}
+        {pokemonList?.map((pokemon) => {
+          return (
+            <PokemonGridComponent key={pokemon.id} pokemon={pokemon}/>
+          )
+        })}
       </Grid2>
     </Box>
   )

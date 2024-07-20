@@ -7,16 +7,16 @@ function SideNavbar() {
   const isScreenDownMd = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <Box
-    elevation={1}
-    bgcolor={theme.palette.background.default}
-    display={isScreenDownMd ? 'none' : 'flex'}
-    height={'100%'}
-    minWidth={96}
-    sx={{
-      border: '1px solid',
-      borderColor: 'InactiveBorder',
-      borderRadius: 2,
-    }}
+      elevation={1}
+      bgcolor={theme.palette.background.default}
+      display={isScreenDownMd ? 'none' : 'flex'}
+      height={'100%'}
+      minWidth={96}
+      sx={{
+        border: '1px solid',
+        borderColor: '#88888888',
+        borderRadius: 2,
+      }}
     >
 
     </Box>
