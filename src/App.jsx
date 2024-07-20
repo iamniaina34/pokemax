@@ -1,19 +1,25 @@
-import { AppBar, Box, CssBaseline, Divider, Link, ThemeProvider, Toolbar, Typography } from '@mui/material'
-import { darkTheme, defaultTheme, lightTheme } from './utilities/themes'
+import { Box, CssBaseline, ThemeProvider } from '@mui/material'
+import { darkTheme, lightTheme } from './utilities/themes'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import Pokemon from './pages/Pokemon'
-import { useState } from 'react'
-import AppIcon from './components/AppIcon'
-import CustomSwitch from './components/CustomSwitch'
-
+import Home from './pages/home/Home'
+import Pokemon from './pages/pokemon/Pokemon'
+import { useEffect, useState } from 'react'
+import CustomAppbar from './components/CustomAppbar'
+import SideNavbar from './components/SideNavbar'
 
 export default function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(!true)
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('isDarkTheme');
+    return savedTheme ? JSON.parse(savedTheme) : false;
+  });
 
   const toggleTheme = (e) => {
     setIsDarkTheme(old => !old)
   }
+
+  useEffect(() => {
+    localStorage.setItem('isDarkTheme', JSON.stringify(isDarkTheme));
+  }, [isDarkTheme]);
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -24,62 +30,30 @@ export default function App() {
         height={'100vh'}
         overflow={'hidden'}
       >
-        <AppBar
-          color='transparent'
-          position="sticky"
-          elevation={0}
+        <CustomAppbar switchValue={isDarkTheme} onSwitchChange={toggleTheme} />
+        <Box
+          flexBasis={'100%'}
+          margin={2}
+          display={'flex'}
+          flexDirection={'row'}
+          gap={2}
+          overflow={'hidden'}
         >
-          <Toolbar
-            disableGutters
-            sx={{
-              paddingInlineStart: '16px',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              gap: '16px',
-            }}
+          <SideNavbar />
+          <Box
+            flexBasis={'100%'}
+            display={'flex'}
+            flexDirection={'column'}
+            overflow={'auto'}
           >
-            <Box
-              height={'48px'}
-              display={'flex'}
-              flexDirection={'row'}
-              justifyContent={'start'}
-              alignItems={'center'}
-              gap={1}
-            >
-              <Link href='/' underline='none'>
-                <AppIcon />
-              </Link>
-              <Typography
-                variant='h6'
-                letterSpacing={4}
-                textAlign={'center'}
-              >
-                POKE<span style={{ color: defaultTheme.palette.primary.main }}>MAX</span>
-              </Typography>
-            </Box>
-            <Box
-              height={'48px'}
-              display={'flex'}
-              flexDirection={'row-reverse'}
-              justifyContent={'end'}
-              alignItems={'center'}
-              gap='4px'
-            >
-              <CustomSwitch
-                value={isDarkTheme}
-                onChange={toggleTheme}
-              />
-            </Box>
-          </Toolbar>
-          <Divider />
-        </AppBar>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/pokemon' element={<Pokemon />} />
-          </Routes>
-        </BrowserRouter>
+            <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/pokemon' element={<Pokemon />} />
+              </Routes>
+            </BrowserRouter>
+          </Box>
+        </Box>
       </Box>
     </ThemeProvider>
   )
