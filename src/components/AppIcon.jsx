@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
+import Icon from '../utilities/iconResolver';
 
 function AppIcon({ size = '2rem', onMouseEnter = () => { }, onMouseLeave = () => { }, onClick = () => { } }) {
     return (
@@ -9,7 +10,7 @@ function AppIcon({ size = '2rem', onMouseEnter = () => { }, onMouseLeave = () =>
             justifyContent={'center'}
         >
             <img
-                src="/icon.png"
+                src={Icon.app}
                 alt="pokemax"
                 style={{
                     width: size,

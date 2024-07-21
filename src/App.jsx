@@ -46,7 +46,7 @@ export default function App() {
             flexDirection={'column'}
             overflow={'auto'}
           >
-            <BrowserRouter>
+            <BrowserRouter basename='/pokemax'>
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/pokemon' element={<Pokemon />} />

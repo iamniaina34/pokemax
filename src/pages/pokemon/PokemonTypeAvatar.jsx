@@ -1,7 +1,7 @@
 import React from 'react'
 import ditto from '../../resources/pokemon.json'
 import { Avatar, Box, Tooltip } from '@mui/material'
-
+import Icon from '../../utilities/iconResolver'
 function PokemonTypeAvatar({ type = ditto.types.at(0) }) {
     return (
         <Tooltip
@@ -14,7 +14,7 @@ function PokemonTypeAvatar({ type = ditto.types.at(0) }) {
                 <Avatar
                     variant='square'
                     alt={type.type.name}
-                    src={`/${type.type.name}.svg`}
+                    src={Icon.type[type.type.name]}
                     sx={{
                         width: 16,
                         height: 16,
