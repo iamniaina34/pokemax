@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { darkTheme, lightTheme } from '../utilities/themes';
+import { Tooltip } from '@mui/material';
 
 const MediumSwitch = styled(Switch)(({ theme }) => ({
     width: 52,
@@ -53,13 +54,15 @@ const MediumSwitch = styled(Switch)(({ theme }) => ({
 
 export default function CustomSwitch({ value = false, onChange = () => { } }) {
     return (
-        <FormControlLabel
-            control={
-                <MediumSwitch
-                    onChange={onChange}
-                    checked={value}
-                />
-            }
-        />
+        <Tooltip title="Change mode" placement='left-start'>
+            <FormControlLabel
+                control={
+                    <MediumSwitch
+                        onChange={onChange}
+                        checked={value}
+                    />
+                }
+            />
+        </Tooltip>
     );
 }
