@@ -41,7 +41,7 @@ function CustomAppbar({ switchValue = false, onSwitchChange = () => { } }) {
           alignItems={'center'}
           gap={1}
         >
-          <Link href='/' underline='none'>
+          <Link href='/pokemax/' underline='none'>
             <AppIcon />
           </Link>
           <Typography
