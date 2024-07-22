@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { PokeApi } from '../../utilities/api'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import PokemonGridComponent from './PokemonGridComponent'
+import PokemonController from './PokemonController'
 
 function Pokemon() {
   const [pokemonList, setPokemonList] = useState([])
@@ -39,25 +40,27 @@ function Pokemon() {
     <div>Loading...</div>
   ) : (
     <Box
-      overflow={'auto'}
-      display={'flex'}
-      flexDirection={'row'}
-      alignItems={'start'}
-      justifyContent={'start'}
-      gap={1}
-      flexWrap={'wrap'}
-      sx={{
-        scrollbarWidth: 'none'
-      }}
+    height={'100%'}
+    display={'flex'}
+    flexDirection={'column'}
+    gap={2}
+    justifyContent={'start'}
+    alignItems={'center'}
     >
+      <PokemonController />
       <Grid2
         container
         spacing={1}
         disableEqualOverflow
+        sx={{
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          scrollbarWidth: 'none'
+        }}
       >
         {pokemonList?.map((pokemon) => {
           return (
-            <PokemonGridComponent key={pokemon.id} pokemon={pokemon}/>
+            <PokemonGridComponent key={pokemon.id} pokemon={pokemon} />
           )
         })}
       </Grid2>

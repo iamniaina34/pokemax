@@ -6,6 +6,7 @@ import Pokemon from './pages/pokemon/Pokemon'
 import { useEffect, useState } from 'react'
 import CustomAppbar from './components/CustomAppbar'
 import SideNavbar from './components/SideNavbar'
+import PokemonProfile from './pages/pokemon/pokemonProfile/PokemonProfile'
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
@@ -44,12 +45,15 @@ export default function App() {
             flexBasis={'100%'}
             display={'flex'}
             flexDirection={'column'}
-            overflow={'auto'}
+            sx={{
+              scrollbarWidth: 'none'
+            }}
           >
             <BrowserRouter basename='/pokemax'>
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/pokemon' element={<Pokemon />} />
+                <Route path={`/pokemon/:name`} element={<PokemonProfile />} />
               </Routes>
             </BrowserRouter>
           </Box>
